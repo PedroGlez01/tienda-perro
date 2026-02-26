@@ -5,6 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos - Guau Store</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        /* Estilos del formulario emergente (para asegurar que funcionen) */
+        .form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-pedido {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .form-cerrar {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+        .form-cerrar:hover {
+            color: #f44336;
+        }
+        .form-grupo {
+            margin-bottom: 20px;
+        }
+        .form-grupo label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-grupo input,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-grupo input.campo-solo-lectura {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            border-left: 4px solid #ff9900;
+        }
+        .form-botones {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .form-botones button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-cancelar {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-enviar {
+            background-color: #25d366;
+            color: white;
+        }
+        .btn-whatsapp-producto {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,121 +107,291 @@
 
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
+        <a href="productos.html" class="activo">Productos</a>
         <a href="contacto.html">Contacto y Pedidos</a>
     </nav>
 
     <div class="contenedor">
         <h2>🍖 Alimentos</h2>
         <div class="grid-productos">
+            <!-- Alimento 1 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Pro Plan Adulto Raza Pequeña</h3>
                 <p>3kg - Piel y pelaje saludable</p>
                 <p class="precio">$850 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Pro Plan Adulto Raza Pequeña 3kg', '$850 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Alimento 2 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Pro Plan Adulto Raza Mediana</h3>
                 <p>3kg - Control de peso</p>
                 <p class="precio">$820 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Pro Plan Adulto Raza Mediana 3kg', '$820 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Alimento 3 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Pedigree Adulto Carne</h3>
                 <p>3kg - Alimento completo</p>
                 <p class="precio">$580 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Pedigree Adulto Carne 3kg', '$580 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Alimento 4 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Royal Canin Cachorro</h3>
                 <p>2kg - Para cachorros hasta 10 meses</p>
                 <p class="precio">$750 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Royal Canin Cachorro 2kg', '$750 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
         </div>
 
         <h2>🛏️ Camas y Mantas</h2>
         <div class="grid-productos">
+            <!-- Cama 1 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Cama Ortopédica Grande</h3>
                 <p>70x50cm. Funda lavable.</p>
                 <p class="precio">$1200 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Cama Ortopédica Grande 70x50cm', '$1200 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Cama 2 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Cama Mediana Tipo Nido</h3>
                 <p>50x40cm. Borde acolchado.</p>
                 <p class="precio">$890 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Cama Mediana Tipo Nido 50x40cm', '$890 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Manta -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Manta Polar</h3>
                 <p>100x70cm. Varios colores.</p>
                 <p class="precio">$320 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Manta Polar 100x70cm', '$320 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
         </div>
 
         <h2>🧸 Juguetes</h2>
         <div class="grid-productos">
+            <!-- Juguete 1 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Kong Clásico Rojo</h3>
                 <p>Para perros medianos</p>
                 <p class="precio">$350 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Kong Clásico Rojo', '$350 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Juguete 2 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Cuerda con Nudos</h3>
                 <p>Juguete para morder y jugar</p>
                 <p class="precio">$120 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Cuerda con Nudos', '$120 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Juguete 3 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Pelota de Goma</h3>
                 <p>Resistente, con sonido</p>
                 <p class="precio">$90 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Pelota de Goma con sonido', '$90 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Juguete 4 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Hueso de Nylon</h3>
                 <p>Para limpieza dental</p>
                 <p class="precio">$150 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Hueso de Nylon para limpieza dental', '$150 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
         </div>
 
         <h2>🦮 Accesorios</h2>
         <div class="grid-productos">
+            <!-- Accesorio 1 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Correa Reflectiva 2m</h3>
                 <p>Nylon, varios colores</p>
                 <p class="precio">$280 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Correa Reflectiva 2m', '$280 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Accesorio 2 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Collar Ajustable</h3>
                 <p>Talla M - Con identificador</p>
                 <p class="precio">$150 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Collar Ajustable Talla M', '$150 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Accesorio 3 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Arnés de Seguridad</h3>
                 <p>Talla M - Para paseos</p>
                 <p class="precio">$420 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Arnés de Seguridad Talla M', '$420 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
+            
+            <!-- Accesorio 4 -->
             <div class="producto-card">
                 <div class="producto-img">[FOTO]</div>
                 <h3>Bebedero Portátil</h3>
                 <p>Para paseos y viajes</p>
                 <p class="precio">$200 CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('Bebedero Portátil', '$200 CUP')">
+                    📱 Comprar por WhatsApp
+                </button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>📱 WhatsApp: 5 123-4567 | 📞 Teléfono: 7 123-4567</p>
+        <p>📱 WhatsApp: 53706086 | 📞 Teléfono: 7 123-4567</p>
         <p>📍 Punto de entrega: Calle Ejemplo #123, La Habana</p>
     </footer>
+
+    <!-- FORMULARIO Y JAVASCRIPT TODO EN UNO -->
+    <div class="form-overlay" id="formOverlay">
+        <div class="form-pedido">
+            <span class="form-cerrar" onclick="cerrarFormulario()">&times;</span>
+            <h2>🐕 Completar pedido</h2>
+            <p>Por favor, completa tus datos:</p>
+            
+            <div class="form-grupo">
+                <label>Producto:</label>
+                <input type="text" id="productoSeleccionado" readonly class="campo-solo-lectura">
+            </div>
+            
+            <div class="form-grupo">
+                <label for="nombreInput">Nombre completo *</label>
+                <input type="text" id="nombreInput" placeholder="Ej: Juan Pérez">
+            </div>
+            
+            <div class="form-grupo">
+                <label for="contactoInput">Teléfono *</label>
+                <input type="tel" id="contactoInput" placeholder="Ej: 53706086">
+            </div>
+            
+            <div class="form-grupo">
+                <label for="direccionInput">Dirección *</label>
+                <textarea id="direccionInput" placeholder="Ej: Calle 123 #456, La Habana" rows="2"></textarea>
+            </div>
+            
+            <div class="form-grupo">
+                <label for="cantidadInput">Cantidad</label>
+                <input type="number" id="cantidadInput" min="1" value="1">
+            </div>
+            
+            <div class="form-botones">
+                <button class="btn-cancelar" onclick="cerrarFormulario()">Cancelar</button>
+                <button class="btn-enviar" onclick="enviarPedido()">📱 Enviar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let productoActual = '';
+        let precioActual = '';
+        
+        // Función para abrir el formulario
+        function abrirFormulario(producto, precio) {
+            console.log("Abriendo formulario para:", producto);
+            productoActual = producto;
+            precioActual = precio;
+            
+            document.getElementById('productoSeleccionado').value = producto + ' - ' + precio;
+            document.getElementById('nombreInput').value = '';
+            document.getElementById('contactoInput').value = '';
+            document.getElementById('direccionInput').value = '';
+            document.getElementById('cantidadInput').value = '1';
+            
+            document.getElementById('formOverlay').style.display = 'flex';
+        }
+        
+        // Función para cerrar el formulario
+        function cerrarFormulario() {
+            document.getElementById('formOverlay').style.display = 'none';
+        }
+        
+        // Función para enviar el pedido
+        function enviarPedido() {
+            const nombre = document.getElementById('nombreInput').value.trim();
+            const contacto = document.getElementById('contactoInput').value.trim();
+            const direccion = document.getElementById('direccionInput').value.trim();
+            const cantidad = document.getElementById('cantidadInput').value;
+            
+            if (!nombre || !contacto || !direccion) {
+                alert('Por favor completa todos los campos obligatorios');
+                return;
+            }
+            
+            let mensaje = `*NUEVO PEDIDO - Guau Store*%0A%0A`;
+            mensaje += `*👤 Cliente:* ${nombre}%0A`;
+            mensaje += `*📱 Contacto:* ${contacto}%0A`;
+            mensaje += `*📍 Dirección:* ${direccion}%0A%0A`;
+            mensaje += `*🛒 PRODUCTO SOLICITADO*%0A`;
+            mensaje += `▪️ Producto: ${productoActual}%0A`;
+            mensaje += `▪️ Precio: ${precioActual}%0A`;
+            mensaje += `▪️ Cantidad: ${cantidad}%0A`;
+            
+            window.open(`https://wa.me/53706086?text=${mensaje}`, '_blank');
+            cerrarFormulario();
+        }
+        
+        // Cerrar si hacen clic fuera del formulario
+        document.getElementById('formOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarFormulario();
+            }
+        });
+        
+        console.log("✅ Todo listo!");
+    </script>
 </body>
 </html>
