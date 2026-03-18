@@ -4,7 +4,10 @@
 
 // Variables globales para el formulario
 let productoActual = '';
-let precioActual = '';
+let precioActualTexto = ''; // Para mostrar (ej: "$1250 CUP")
+let precioUnitario = 0; // NUEVO: Guardamos el precio como número para cálculos
+let productoIdActual = '';
+let productosGlobal = []; // Aquí guardaremos los productos
 
 // Función para verificar si un producto es nuevo (menos de 3 días)
 function esProductoNuevo(producto) {
@@ -40,17 +43,31 @@ function mostrarCategoria(categoria) {
     localStorage.setItem('categoria-activa', categoria);
 }
 
-// Función para abrir el formulario
-function abrirFormulario(producto, precio) {
+// NUEVA FUNCIÓN: Actualizar el total cuando cambia la cantidad
+function actualizarTotal() {
+    const cantidad = parseInt(document.getElementById('cantidadInput').value) || 1;
+    const total = precioUnitario * cantidad;
+    document.getElementById('totalPagar').value = `$${total} CUP`;
+}
+
+// Función para abrir el formulario - MODIFICADA
+function abrirFormulario(producto, precioTexto, precioNumero, id) {
     productoActual = producto;
-    precioActual = precio;
+    precioActualTexto = precioTexto;
+    precioUnitario = precioNumero;
+    productoIdActual = id || '';
     
-    document.getElementById('productoSeleccionado').value = `${producto} - ${precio}`;
+    // Establecer valores iniciales
+    document.getElementById('productoSeleccionado').value = `${producto} - ${precioTexto}`;
     document.getElementById('nombreInput').value = '';
     document.getElementById('contactoInput').value = '';
     document.getElementById('direccionInput').value = '';
     document.getElementById('cantidadInput').value = '1';
     
+    // Calcular y mostrar el total inicial
+    actualizarTotal();
+    
+    // Mostrar el formulario
     document.getElementById('formOverlay').style.display = 'flex';
 }
 
@@ -59,28 +76,37 @@ function cerrarFormulario() {
     document.getElementById('formOverlay').style.display = 'none';
 }
 
-// Función para enviar el pedido
+// Función para enviar el pedido - MODIFICADA para incluir el total
 function enviarPedido() {
     const nombre = document.getElementById('nombreInput').value.trim();
     const contacto = document.getElementById('contactoInput').value.trim();
     const direccion = document.getElementById('direccionInput').value.trim();
-    const cantidad = document.getElementById('cantidadInput').value;
+    const cantidad = parseInt(document.getElementById('cantidadInput').value) || 1;
+    const total = precioUnitario * cantidad;
     
     if (!nombre || !contacto || !direccion) {
         alert('Por favor completa todos los campos obligatorios');
         return;
     }
     
+    // Crear mensaje con TODO incluido
     let mensaje = `*NUEVO PEDIDO - TodoClick*%0A%0A`;
     mensaje += `*👤 Cliente:* ${nombre}%0A`;
     mensaje += `*📱 Contacto:* ${contacto}%0A`;
     mensaje += `*📍 Dirección:* ${direccion}%0A%0A`;
-    mensaje += `*🛒 PRODUCTO SOLICITADO*%0A`;
+    mensaje += `*🛒 DETALLE DEL PEDIDO*%0A`;
     mensaje += `▪️ Producto: ${productoActual}%0A`;
-    mensaje += `▪️ Precio: ${precioActual}%0A`;
+    mensaje += `▪️ Precio unitario: ${precioActualTexto}%0A`;
     mensaje += `▪️ Cantidad: ${cantidad}%0A`;
+    mensaje += `▪️ *TOTAL A PAGAR: $${total} CUP*%0A`; // NUEVO: Total en negrita
     
+    // Agregar nota si es necesario
+    mensaje += `%0A📌 Nota: Por favor confirmar disponibilidad y horario de entrega.`;
+    
+    // Abrir WhatsApp
     window.open(`https://wa.me/53706086?text=${mensaje}`, '_blank');
+    
+    // Cerrar formulario
     cerrarFormulario();
 }
 
@@ -89,7 +115,6 @@ function obtenerCategorias(productos) {
     const categorias = {};
     productos.forEach(prod => {
         if (!categorias[prod.categoria]) {
-            // Asignar un ícono por defecto o basado en la categoría
             let icono = '📦';
             if (prod.categoria === 'electronica') icono = '💻';
             else if (prod.categoria === 'hogar') icono = '🏠';
@@ -133,7 +158,6 @@ function generarContenedoresCategorias() {
     }
     container.innerHTML = html;
     
-    // Ahora llenamos cada contenedor con su grid
     for (const key of Object.keys(categorias)) {
         const contenedor = document.getElementById(`categoria-${key}`);
         if (contenedor) {
@@ -145,14 +169,12 @@ function generarContenedoresCategorias() {
     }
 }
 
-// Función para generar las tarjetas de productos
+// Función para generar las tarjetas de productos - MODIFICADA la llamada a abrirFormulario
 function generarTarjetasProductos(productosFiltrados = null) {
     const productosAMostrar = productosFiltrados || productos;
     
-    // Limpiar grids existentes
     document.querySelectorAll('.grid-productos').forEach(grid => grid.innerHTML = '');
     
-    // Generar productos
     productosAMostrar.forEach(prod => {
         const grid = document.getElementById(`grid-${prod.categoria}`);
         if (grid) {
@@ -172,13 +194,16 @@ function generarTarjetasProductos(productosFiltrados = null) {
                 etiquetaHTML = `<div class="etiqueta etiqueta-mas-vendido">⭐ MÁS VENDIDO</div>`;
             }
             
+            // MODIFICADO: Pasar el precio como número
+            const precioNumero = prod.precio;
+            
             card.innerHTML = `
                 ${etiquetaHTML}
                 <img src="imagenes/${prod.imagen}" alt="${prod.nombre}" class="producto-imagen-real">
                 <h3>${prod.nombre}</h3>
                 <p>${prod.descripcion}</p>
-                <p class="precio">$${prod.precio} CUP</p>
-                <button class="btn-whatsapp-producto" onclick="abrirFormulario('${prod.nombre} - ${prod.descripcion}', '$${prod.precio} CUP')">
+                <p class="precio">$${precioNumero} CUP</p>
+                <button class="btn-whatsapp-producto" onclick="abrirFormulario('${prod.nombre} - ${prod.descripcion}', '$${precioNumero} CUP', ${precioNumero}, '${prod.id}')">
                     📱 Comprar por WhatsApp
                 </button>
             `;
@@ -199,7 +224,7 @@ function actualizarContadores() {
     }
 }
 
-// Función para el buscador (NUEVA)
+// Función para configurar el buscador
 function configurarBuscador() {
     const buscador = document.getElementById('buscador');
     if (!buscador) return;
@@ -208,22 +233,18 @@ function configurarBuscador() {
         const termino = e.target.value.toLowerCase().trim();
         
         if (termino === '') {
-            // Si no hay término, mostrar todo y restaurar categorías
             document.querySelectorAll('.grid-productos').forEach(grid => {
                 Array.from(grid.children).forEach(card => {
                     card.style.display = 'block';
                 });
             });
-            // Volver a activar la categoría guardada
             const categoriaGuardada = localStorage.getItem('categoria-activa') || Object.keys(obtenerCategorias(productos))[0];
             mostrarCategoria(categoriaGuardada);
             return;
         }
         
-        // Ocultar todos los contenedores de categorías y mostrar una vista de "resultados"
         document.querySelectorAll('.categoria-contenido').forEach(el => el.classList.remove('activo'));
         
-        // Crear o mostrar un contenedor de resultados
         let resultadosContainer = document.getElementById('resultados-busqueda');
         if (!resultadosContainer) {
             resultadosContainer = document.createElement('div');
@@ -238,7 +259,6 @@ function configurarBuscador() {
         const gridResultados = document.getElementById('grid-resultados');
         gridResultados.innerHTML = '';
         
-        // Filtrar productos
         const productosFiltrados = productos.filter(prod => 
             prod.nombre.toLowerCase().includes(termino) || 
             prod.descripcion.toLowerCase().includes(termino)
@@ -264,13 +284,15 @@ function configurarBuscador() {
                     etiquetaHTML = `<div class="etiqueta etiqueta-mas-vendido">⭐ MÁS VENDIDO</div>`;
                 }
                 
+                const precioNumero = prod.precio;
+                
                 card.innerHTML = `
                     ${etiquetaHTML}
                     <img src="imagenes/${prod.imagen}" alt="${prod.nombre}" class="producto-imagen-real">
                     <h3>${prod.nombre}</h3>
                     <p>${prod.descripcion}</p>
-                    <p class="precio">$${prod.precio} CUP</p>
-                    <button class="btn-whatsapp-producto" onclick="abrirFormulario('${prod.nombre} - ${prod.descripcion}', '$${prod.precio} CUP')">
+                    <p class="precio">$${precioNumero} CUP</p>
+                    <button class="btn-whatsapp-producto" onclick="abrirFormulario('${prod.nombre} - ${prod.descripcion}', '$${precioNumero} CUP', ${precioNumero}, '${prod.id}')">
                         📱 Comprar por WhatsApp
                     </button>
                 `;
@@ -282,14 +304,15 @@ function configurarBuscador() {
 
 // Inicializar cuando cargue la página
 document.addEventListener('DOMContentLoaded', function() {
-    // Generar estructura dinámica de categorías
+    // Guardar productos en variable global
+    if (typeof productos !== 'undefined') {
+        productosGlobal = productos;
+    }
+    
+    // Generar estructura
     generarBotonesCategorias();
     generarContenedoresCategorias();
-    
-    // Generar tarjetas de productos
     generarTarjetasProductos();
-    
-    // Actualizar contadores
     actualizarContadores();
     
     // Cargar última categoría vista
