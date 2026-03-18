@@ -3,218 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Guau Store</title>
+    <title>Catálogo - TodoClick</title>
     <link rel="stylesheet" href="css/estilo.css">
     <style>
-        /* Estilos para categorías */
+        /* Estilos específicos de la página de catálogo */
+        .barra-busqueda {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 20px 0 30px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+        .barra-busqueda:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.2);
+        }
         .categorias-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin: 30px 0;
             flex-wrap: wrap;
         }
-        
         .categoria-btn {
-            background: linear-gradient(135deg, #ff9900, #ff6b6b);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 18px;
+            background: white;
+            color: #2c3e50;
+            border: 2px solid #e0e0e0;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        
         .categoria-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            border-color: #4a90e2;
+            color: #4a90e2;
+            transform: translateY(-2px);
         }
-        
         .categoria-btn.activo {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
-            transform: scale(1.05);
+            background: #4a90e2;
+            border-color: #4a90e2;
+            color: white;
         }
-        
         .categoria-contenido {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.4s ease-out;
         }
-        
         .categoria-contenido.activo {
             display: block;
         }
-        
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
         .categoria-titulo {
             text-align: center;
             color: #2c3e50;
-            margin: 20px 0;
-            font-size: 24px;
-            border-bottom: 3px solid #ff9900;
+            margin: 20px 0 30px;
+            font-size: 28px;
+            border-bottom: 3px solid #f5b342;
             padding-bottom: 10px;
             display: inline-block;
         }
-        
-        /* Contador de productos */
         .contador-productos {
-            background-color: rgba(255,255,255,0.3);
+            background-color: rgba(0,0,0,0.1);
             border-radius: 20px;
-            padding: 3px 10px;
-            font-size: 14px;
-            margin-left: 10px;
+            padding: 2px 8px;
+            font-size: 13px;
+            margin-left: 5px;
+            color: inherit;
         }
-        
-        /* Estilos del formulario emergente */
+        .categoria-btn.activo .contador-productos {
+            background-color: rgba(255,255,255,0.3);
+        }
+        /* Estilos del overlay del formulario (se mantienen) */
         .form-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 9999;
             display: none;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .form-pedido {
             background-color: white;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 30px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
         .form-cerrar {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            color: #999;
+            position: absolute; top: 15px; right: 20px;
+            font-size: 30px; cursor: pointer; color: #999;
         }
-        .form-cerrar:hover {
-            color: #f44336;
-        }
-        .form-grupo {
-            margin-bottom: 20px;
-        }
+        .form-cerrar:hover { color: #f44336; }
+        .form-grupo { margin-bottom: 20px; }
         .form-grupo label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: bold;
+            display: block; margin-bottom: 5px;
+            color: #333; font-weight: bold;
         }
-        .form-grupo input,
-        .form-grupo textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
+        .form-grupo input, .form-grupo textarea {
+            width: 100%; padding: 12px;
+            border: 1px solid #ddd; border-radius: 8px;
+            font-size: 16px; box-sizing: border-box;
         }
         .form-grupo input.campo-solo-lectura {
-            background-color: #f5f5f5;
-            font-weight: bold;
-            border-left: 4px solid #ff9900;
+            background-color: #f5f5f5; font-weight: bold;
+            border-left: 4px solid #4a90e2;
         }
         .form-botones {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
+            display: flex; gap: 10px; margin-top: 30px;
         }
         .form-botones button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+            flex: 1; padding: 14px; border: none;
+            border-radius: 8px; font-size: 16px;
+            font-weight: bold; cursor: pointer;
+            transition: all 0.3s;
         }
-        .btn-cancelar {
-            background-color: #f44336;
-            color: white;
-        }
-        .btn-enviar {
-            background-color: #25d366;
-            color: white;
-        }
+        .btn-cancelar { background-color: #f44336; color: white; }
+        .btn-cancelar:hover { background-color: #d32f2f; }
+        .btn-enviar { background-color: #25d366; color: white; }
+        .btn-enviar:hover { background-color: #128C7E; }
         .btn-whatsapp-producto {
-            background-color: #25d366;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 10px;
+            background-color: #25d366; color: white; border: none;
+            padding: 12px 15px; border-radius: 8px; cursor: pointer;
+            font-size: 15px; font-weight: bold; width: 100%;
+            margin-top: 15px; transition: background-color 0.3s;
         }
-        
-        /* Estilos para imágenes reales de productos */
+        .btn-whatsapp-producto:hover { background-color: #128C7E; }
         .producto-imagen-real {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            display: block;
+            width: 100%; height: 180px; object-fit: cover;
+            border-radius: 10px 10px 0 0; display: block;
             background-color: #f0f0f0;
         }
-        
-        /* Responsive */
         @media (max-width: 768px) {
-            .categoria-btn {
-                padding: 12px 20px;
-                font-size: 16px;
-            }
+            .categoria-btn { padding: 10px 18px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>🐕 Guau Store 🐕</h1>
-        <p>Nuestros productos</p>
+        <h1>🛒 TodoClick 🚀</h1>
+        <p>Nuestro catálogo de productos</p>
     </header>
 
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="productos.html" class="activo">Productos</a>
+        <a href="productos.html" class="activo">Catálogo</a>
         <a href="contacto.html">Contacto y Pedidos</a>
     </nav>
 
     <div class="contenedor">
-        <!-- BOTONES DE CATEGORÍAS -->
-        <div class="categorias-container">
-            <button class="categoria-btn" onclick="mostrarCategoria('arreos')" id="btn-arreos">
-                🦮 ARREOS <span class="contador-productos" id="cont-arreos">0</span>
-            </button>
-            <button class="categoria-btn" onclick="mostrarCategoria('juguetes')" id="btn-juguetes">
-                🧸 JUGUETES <span class="contador-productos" id="cont-juguetes">0</span>
-            </button>
-            <button class="categoria-btn" onclick="mostrarCategoria('aseo')" id="btn-aseo">
-                🧴 ASEO <span class="contador-productos" id="cont-aseo">0</span>
-            </button>
-        </div>
+        <!-- BARRA DE BÚSQUEDA (NUEVA) -->
+        <input type="text" class="barra-busqueda" id="buscador" placeholder="🔍 Busca lo que necesitas... (ej. audífonos, olla, reloj)">
 
-        <!-- CONTENEDORES DE CATEGORÍAS (se llenan automáticamente) -->
-        <div id="categoria-arreos" class="categoria-contenido"></div>
-        <div id="categoria-juguetes" class="categoria-contenido"></div>
-        <div id="categoria-aseo" class="categoria-contenido"></div>
+        <!-- BOTONES DE CATEGORÍAS -->
+        <div class="categorias-container" id="categoriasContainer"></div>
+
+        <!-- CONTENEDORES DE CATEGORÍAS -->
+        <div id="categoria-contenedores"></div>
     </div>
 
     <footer>
@@ -226,34 +190,27 @@
     <div class="form-overlay" id="formOverlay">
         <div class="form-pedido">
             <span class="form-cerrar" onclick="cerrarFormulario()">&times;</span>
-            <h2>🐕 Completar pedido</h2>
-            <p>Por favor, completa tus datos:</p>
-            
+            <h2>🛒 Completar pedido</h2>
             <div class="form-grupo">
                 <label>Producto:</label>
                 <input type="text" id="productoSeleccionado" readonly class="campo-solo-lectura">
             </div>
-            
             <div class="form-grupo">
                 <label for="nombreInput">Nombre completo *</label>
                 <input type="text" id="nombreInput" placeholder="Ej: Juan Pérez">
             </div>
-            
             <div class="form-grupo">
                 <label for="contactoInput">Teléfono *</label>
                 <input type="tel" id="contactoInput" placeholder="Ej: 53706086">
             </div>
-            
             <div class="form-grupo">
                 <label for="direccionInput">Dirección *</label>
                 <textarea id="direccionInput" placeholder="Ej: Calle 123 #456, La Habana" rows="2"></textarea>
             </div>
-            
             <div class="form-grupo">
                 <label for="cantidadInput">Cantidad</label>
                 <input type="number" id="cantidadInput" min="1" value="1">
             </div>
-            
             <div class="form-botones">
                 <button class="btn-cancelar" onclick="cerrarFormulario()">Cancelar</button>
                 <button class="btn-enviar" onclick="enviarPedido()">📱 Enviar por WhatsApp</button>
@@ -261,7 +218,6 @@
         </div>
     </div>
 
-    <!-- SCRIPTS (ORDEN IMPORTANTE) -->
     <script src="js/productos.js"></script>
     <script src="js/tienda.js"></script>
 </body>

@@ -1,172 +1,140 @@
 // ============================================
-// ARCHIVO CENTRAL DE PRODUCTOS
+// ARCHIVO CENTRAL DE PRODUCTOS - TODOCLICK
 // ============================================
-// Para agregar un producto NUEVO, añade:
-// nuevo: true,
-// fecha_ingreso: '2025-02-27' (fecha de hoy)
+// Instrucciones para agregar productos:
+
+// 1. Etiqueta "NUEVO": nuevo: true, fecha_ingreso: '2025-03-18' (fecha de hoy)
+// 2. Etiqueta "OFERTA": oferta: true, precio_original: 999 (opcional para mostrarlo luego)
+// 3. Etiqueta "MÁS VENDIDO": mas_vendido: true
 
 const productos = [
-    // ===== ARREOS =====
+    // ===== ELECTRÓNICA =====
     {
-        id: 'correa-reflectiva',
-        nombre: 'Correa Reflectiva',
-        descripcion: '2 metros - Nylon reflectante',
-        precio: 280,
+        id: 'audifonos-bluetooth',
+        nombre: 'Audífonos Bluetooth',
+        descripcion: 'Inalámbricos, sonido estéreo, batería de larga duración.',
+        precio: 1250,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
+        categoria: 'electronica',
+        oferta: true
     },
     {
-        id: 'collar-ajustable',
-        nombre: 'Collar Ajustable',
-        descripcion: 'Talla M - Con identificador',
-        precio: 150,
+        id: 'cargador-portatil',
+        nombre: 'Cargador Portátil 10000mAh',
+        descripcion: 'Batería externa, dos puertos USB, carga rápida.',
+        precio: 1850,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
+        categoria: 'electronica',
+        mas_vendido: true
     },
     {
-        id: 'arnes-seguridad',
-        nombre: 'Arnés de Seguridad',
-        descripcion: 'Talla M - Para paseos',
-        precio: 420,
+        id: 'parlante-bluetooth',
+        nombre: 'Parlante Bluetooth Portátil',
+        descripcion: 'Resistente al agua, con luz LED y micrófono.',
+        precio: 2200,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
-    },
-    {
-        id: 'correa-retractil',
-        nombre: 'Correa Retráctil',
-        descripcion: '5 metros - Con freno',
-        precio: 350,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
-    },
-    {
-        id: 'collar-cuero',
-        nombre: 'Collar de Cuero',
-        descripcion: 'Talla L - Cuero genuino',
-        precio: 280,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
-    },
-    {
-        id: 'pecheras',
-        nombre: 'Pecheras',
-        descripcion: 'Talla S - Para razas pequeñas',
-        precio: 310,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'arreos'
+        categoria: 'electronica'
     },
 
-    // ===== JUGUETES =====
+    // ===== HOGAR Y COCINA =====
     {
-        id: 'kong-clasico',
-        nombre: 'Kong Clásico',
-        descripcion: 'Para perros medianos',
-        precio: 350,
+        id: 'set-cocina',
+        nombre: 'Set de Cocina 5 piezas',
+        descripcion: 'Utensilios de silicona antiadherente, mangos de madera.',
+        precio: 950,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
+        categoria: 'hogar'
     },
     {
-        id: 'cuerda-nudos',
-        nombre: 'Cuerda con Nudos',
-        descripcion: 'Para morder y jugar',
-        precio: 120,
+        id: 'organizador-escritorio',
+        nombre: 'Organizador de Escritorio',
+        descripcion: 'Multiusos, de bambú, con compartimentos.',
+        precio: 780,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
+        categoria: 'hogar'
     },
     {
-        id: 'pelota-goma',
-        nombre: 'Pelota de Goma',
-        descripcion: 'Con sonido, resistente',
-        precio: 90,
+        id: 'lampara-led',
+        nombre: 'Lámpara LED de Mesa',
+        descripcion: 'Con brazo flexible, luz cálida y fría, táctil.',
+        precio: 1150,
         imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
-    },
-    {
-        id: 'hueso-nylon',
-        nombre: 'Hueso de Nylon',
-        descripcion: 'Para limpieza dental',
-        precio: 150,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
-    },
-    {
-        id: 'frisbee',
-        nombre: 'Frisbee',
-        descripcion: 'Para lanzar y atrapar',
-        precio: 180,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
-    },
-    {
-        id: 'mordedor',
-        nombre: 'Mordedor',
-        descripcion: 'Para cachorros',
-        precio: 95,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes'
-    },
-
-    // ===== ASEO =====
-    {
-        id: 'shampoo-antipulgas',
-        nombre: 'Shampoo Antipulgas',
-        descripcion: '500ml - Para todo tipo de pelo',
-        precio: 220,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    {
-        id: 'cepillo-cerdas',
-        nombre: 'Cepillo de Cerdas',
-        descripcion: 'Para pelo corto y largo',
-        precio: 130,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    {
-        id: 'cortauñas',
-        nombre: 'Cortaúñas',
-        descripcion: 'Acero inoxidable',
-        precio: 160,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    {
-        id: 'toalla-microfibra',
-        nombre: 'Toalla Microfibra',
-        descripcion: 'Secado rápido',
-        precio: 210,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    {
-        id: 'shampoo-hidratante',
-        nombre: 'Shampoo Hidratante',
-        descripcion: 'Para piel seca',
-        precio: 190,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    {
-        id: 'guantes-aseo',
-        nombre: 'Guantes de Aseo',
-        descripcion: 'Para baño',
-        precio: 85,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'aseo'
-    },
-    
-    // ===== PRODUCTO DE EJEMPLO CON ETIQUETA NUEVO =====
-    // Este es un producto nuevo que mostrará la etiqueta por 3 días
-    // Cópialo y modifícalo para agregar tus productos nuevos
-    {
-        id: 'juguete-nuevo-ejemplo',
-        nombre: 'Hueso Saborizado',
-        descripcion: 'Sabor a pollo - Muy resistente',
-        precio: 165,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'juguetes',
+        categoria: 'hogar',
         nuevo: true,
-        fecha_ingreso: '2026-02-27' // Cambia a la fecha de hoy
+        fecha_ingreso: '2025-03-18'
+    },
+
+    // ===== MODA Y ACCESORIOS =====
+    {
+        id: 'reloj-hombre',
+        nombre: 'Reloj Analógico Hombre',
+        descripcion: 'Acero inoxidable, correa de cuero, resistente al agua.',
+        precio: 2100,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'gafas-sol',
+        nombre: 'Gafas de Sol Polarizadas',
+        descripcion: 'Protección UV400, diseño clásico.',
+        precio: 690,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'moda',
+        oferta: true
+    },
+    {
+        id: 'mochila',
+        nombre: 'Mochila Impermeable',
+        descripcion: 'Capacidad 15L, ideal para laptop, varios compartimientos.',
+        precio: 1650,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'moda'
+    },
+
+    // ===== BELLEZA Y CUIDADO =====
+    {
+        id: 'kit-manicura',
+        nombre: 'Kit de Manicura y Pedicura',
+        descripcion: '14 piezas de acero inoxidable, estuche incluido.',
+        precio: 520,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'belleza'
+    },
+    {
+        id: 'cepillo-alisador',
+        nombre: 'Cepillo Alisador de Pelo',
+        descripcion: 'Calefacción rápida, para todo tipo de cabello.',
+        precio: 1450,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'belleza',
+        mas_vendido: true
+    },
+    {
+        id: 'set-brochas',
+        nombre: 'Set de Brochas para Maquillaje',
+        descripcion: '12 brochas profesionales, con estuche.',
+        precio: 890,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'belleza',
+        nuevo: true,
+        fecha_ingreso: '2025-03-17'
+    },
+
+    // ===== DEPORTES =====
+    {
+        id: 'pesas-rusas',
+        nombre: 'Pesas Rusas 4kg (Par)',
+        descripcion: 'Recubiertas de vinilo, agarre cómodo.',
+        precio: 1350,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'deportes'
+    },
+    {
+        id: 'esterilla-yoga',
+        nombre: 'Esterilla para Yoga',
+        descripcion: 'Antideslizante, con correa de transporte.',
+        precio: 620,
+        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        categoria: 'deportes'
     }
 ];
