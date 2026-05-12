@@ -10,131 +10,586 @@
 const productos = [
     // ===== ELECTRÓNICA =====
     {
-        id: 'audifonos-bluetooth',
+        id: 'audifonos-1',
         nombre: 'Audífonos Bluetooth',
-        descripcion: 'Inalámbricos, sonido estéreo, batería de larga duración.',
-        precio: 1250,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'electronica',
-        oferta: true
-    },
-    {
-        id: 'cargador-portatil',
-        nombre: 'Cargador Portátil 10000mAh',
-        descripcion: 'Batería externa, dos puertos USB, carga rápida.',
-        precio: 1850,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'electronica',
-        mas_vendido: true
-    },
-    {
-        id: 'parlante-bluetooth',
-        nombre: 'Parlante Bluetooth Portátil',
-        descripcion: 'Resistente al agua, con luz LED y micrófono.',
-        precio: 2200,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        descripcion: '',
+        precio: 5500,
+        imagen: '1778555030818.jpg',
         categoria: 'electronica'
     },
-
-    // ===== HOGAR Y COCINA =====
     {
-        id: 'set-cocina',
-        nombre: 'Set de Cocina 5 piezas',
-        descripcion: 'Utensilios de silicona antiadherente, mangos de madera.',
-        precio: 950,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'hogar'
+        id: 'audifonos-2',
+        nombre: 'Audífonos Bluetooth',
+        descripcion: '',
+        precio: 5500,
+        imagen: '1778555030771.jpg',
+        categoria: 'electronica'
     },
     {
-        id: 'organizador-escritorio',
-        nombre: 'Organizador de Escritorio',
-        descripcion: 'Multiusos, de bambú, con compartimentos.',
-        precio: 780,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'hogar'
-    },
-    {
-        id: 'lampara-led',
-        nombre: 'Lámpara LED de Mesa',
-        descripcion: 'Con brazo flexible, luz cálida y fría, táctil.',
-        precio: 1150,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'hogar',
-        nuevo: true,
-        fecha_ingreso: '2025-03-18'
+        id: 'audifonos-3',
+        nombre: 'Audífonos Bluetooth',
+        descripcion: '',
+        precio: 5500,
+        imagen: '1778555030862.jpg',
+        categoria: 'electronica'
     },
 
     // ===== MODA Y ACCESORIOS =====
     {
-        id: 'reloj-hombre',
-        nombre: 'Reloj Analógico Hombre',
-        descripcion: 'Acero inoxidable, correa de cuero, resistente al agua.',
-        precio: 2100,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        id: 'camisa',
+        nombre: 'Camisa',
+        descripcion: 'Talla L',
+        precio: 5500,
+        imagen: '1778555027554.jpg',
         categoria: 'moda'
     },
     {
-        id: 'gafas-sol',
-        nombre: 'Gafas de Sol Polarizadas',
-        descripcion: 'Protección UV400, diseño clásico.',
-        precio: 690,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'moda',
-        oferta: true
-    },
-    {
-        id: 'mochila',
-        nombre: 'Mochila Impermeable',
-        descripcion: 'Capacidad 15L, ideal para laptop, varios compartimientos.',
-        precio: 1650,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
+        id: 'chaqueta',
+        nombre: 'Chaqueta',
+        descripcion: 'Talla XS..(viene siendo L).. 20 usd o al cambio',
+        
+        imagen: '1778555027624.jpg',
         categoria: 'moda'
     },
-
-    // ===== BELLEZA Y CUIDADO =====
     {
-        id: 'kit-manicura',
-        nombre: 'Kit de Manicura y Pedicura',
-        descripcion: '14 piezas de acero inoxidable, estuche incluido.',
-        precio: 520,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'belleza'
+        id: 'chaqueta',
+        nombre: 'Chaqueta',
+        descripcion: 'Talla M..(sirve a L).. 20 usd o al cambio',
+        
+        imagen: '1778555027678.jpg',
+        categoria: 'moda'
     },
     {
-        id: 'cepillo-alisador',
-        nombre: 'Cepillo Alisador de Pelo',
-        descripcion: 'Calefacción rápida, para todo tipo de cabello.',
-        precio: 1450,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'belleza',
-        mas_vendido: true
+        id: 'abrigo',
+        nombre: 'Abrigo',
+        descripcion: 'Talla L',
+        precio: 8000,
+        imagen: '1778555027728.jpg',
+        categoria: 'moda'
     },
     {
-        id: 'set-brochas',
-        nombre: 'Set de Brochas para Maquillaje',
-        descripcion: '12 brochas profesionales, con estuche.',
-        precio: 890,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'belleza',
-        nuevo: true,
-        fecha_ingreso: '2025-03-17'
-    },
-
-    // ===== DEPORTES =====
-    {
-        id: 'pesas-rusas',
-        nombre: 'Pesas Rusas 4kg (Par)',
-        descripcion: 'Recubiertas de vinilo, agarre cómodo.',
-        precio: 1350,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'deportes'
+        id: 'abrigo',
+        nombre: 'Abrigo',
+        descripcion: 'Talla L',
+        precio: 10000,
+        imagen: '1778555027776.jpg',
+        categoria: 'moda'
     },
     {
-        id: 'esterilla-yoga',
-        nombre: 'Esterilla para Yoga',
-        descripcion: 'Antideslizante, con correa de transporte.',
-        precio: 620,
-        imagen: 'photo_2026-02-27_04-16-36.jpg',
-        categoria: 'deportes'
-    }
+        id: 'pantalon',
+        nombre: 'Pantalon 4 Puertas',
+        descripcion: 'Talla: L, Color: Negro',
+        precio: 6500,
+        imagen: '1778555027825.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pantalon',
+        nombre: '',
+        descripcion: 'Talla: M y S, Color: Negro',
+        precio: 6500,
+        imagen: '1778555027921.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pantalon',
+        nombre: 'Pantalon',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555027969.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pantalon',
+        nombre: 'Mono Gris',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555028019.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pantalon',
+        nombre: 'Pantalon',
+        descripcion: 'Talla: L',
+        precio: 6500,
+        imagen: '1778555028068.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'camiseta',
+        nombre: 'Camiseta',
+        descripcion: 'Talla: L 16 usd o al cambio',
+        
+        imagen: '1778555028170.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'camiseta',
+        nombre: 'Camiseta',
+        descripcion: 'Talla: L 16 usd o al cambio El jugador es Tatum',
+        
+        imagen: '1778555028119.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'short',
+        nombre: 'Shorts',
+        descripcion: 'Talla: S, 22 usd o al cambio, Es Corto',
+        
+        imagen: '1778555028220.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'short',
+        nombre: 'Shorts',
+        descripcion: 'Talla: 30, 24 usd o al cambio',
+        
+        imagen: '1778555028270.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028467.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028514.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028566.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028614.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028665.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullovers',
+        descripcion: 'Talla: XL',
+        precio: 5000,
+        imagen: '1778555028713.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6000,
+        imagen: '1778555028763.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6000,
+        imagen: '1778555028810.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6000,
+        imagen: '1778555028860.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6000,
+        imagen: '1778555028909.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555029005.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555028957.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555029101.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555029149.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555029196.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: Unica',
+        precio: 6000,
+        imagen: '1778555029243.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'vestido',
+        nombre: 'Vestido',
+        descripcion: 'Talla: S',
+        precio: 6500,
+        imagen: '1778555029289.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullover',
+        descripcion: 'Talla: S',
+        precio: 3700,
+        imagen: '1778555029337.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullover',
+        descripcion: 'Talla: S',
+        precio: 3700,
+        imagen: '1778555029384.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'pullover',
+        nombre: 'Pullover',
+        descripcion: 'Talla: S',
+        precio: 3700,
+        imagen: '1778555029430.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa',
+        nombre: 'Blusa',
+        descripcion: 'Talla: M',
+        precio: 3300,
+        imagen: '1778555029477.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa',
+        nombre: 'Blusa',
+        descripcion: 'Unitalla',
+        precio: 2800,
+        imagen: '1778555029523.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa',
+        nombre: 'Blusa',
+        descripcion: 'Unitalla',
+        precio: 2800,
+        imagen: '1778555029614.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa',
+        nombre: 'Blusa',
+        descripcion: 'Talla: S',
+        precio: 2800,
+        imagen: '1778555029660.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa y short',
+        nombre: 'Blusa y Short',
+        descripcion: 'Talla: S',
+        precio: 3700,
+        imagen: '1778555029706.jpg',
+        categoria: 'moda'
+    },
+    {
+        id: 'blusa y short',
+        nombre: 'Blusa y Short',
+        descripcion: 'Talla: S',
+        precio: 3700,
+        imagen: '1778555029749.jpg',
+        categoria: 'moda'
+    },
+    // ===== ACCESORIOS  =====
+    {
+        id: 'gorra',
+        nombre: 'Gorra Brooklyn',
+        descripcion: 'Color: Negra',
+        precio: 4000,
+        imagen: '1778555029794.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'gorra',
+        nombre: 'Gorra NY',
+        descripcion: 'Color: Gris',
+        precio: 4000,
+        imagen: '1778555029840.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'canguro-riñonera',
+        nombre: 'Canguro-Riñonera',
+        descripcion: 'Color: Negro',
+        precio: 3500,
+        imagen: '1778555029887.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'canguro-riñonera',
+        nombre: 'Canguro-Riñonera',
+        descripcion: 'Color: Negro',
+        precio: 3500,
+        imagen: '1778555029933.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'canguro-riñonera',
+        nombre: 'Canguro-Riñonera',
+        descripcion: 'Color: Negro',
+        precio: 3500,
+        imagen: '1778555029980.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030259.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030307.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030259.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030353.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030400.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030072.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'bolso',
+        nombre: 'Bolso',
+        descripcion: '',
+        precio: 4500,
+        imagen: '1778555030118.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'billetera',
+        nombre: 'Billetera',
+        descripcion: '',
+        precio: 2300,
+        imagen: '1778555030026.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cinto',
+        nombre: 'Cinto',
+        descripcion: 'Color: Negro / Tamaño: 43.3 pulgadas',
+        precio: 4500,
+        imagen: '1778555030167.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cinto',
+        nombre: 'Cinto',
+        descripcion: 'Color: Negro-B / Tamaño: 51.18 pulgadas',
+        precio: 3300,
+        imagen: '1778555030213.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cinto',
+        nombre: 'Cinto',
+        descripcion: 'Color: 3 Piezas Negro / Tamaño: 51.18 pulgadas',
+        precio: 3000,
+        imagen: '1778555030677.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'relojes',
+        nombre: 'Reloj',
+        descripcion: 'Boxes Not Included',
+        precio: 3500,
+        imagen: '1778555030445.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: '',
+        precio: 3500,
+        imagen: '1778555030491.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: '',
+        precio: 2700,
+        imagen: '1778555030583.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: '',
+        precio: 3500,
+        imagen: '1778555030537.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: '8 usd o al cambio',
+        
+        imagen: '1778555030629.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: 'Color: Negro',
+        precio: 4000,
+        imagen: '1778555030946.jpg',
+        categoria: 'accesorios',
+        
+    },
+    {
+        id: 'cadenas',
+        nombre: 'Cadenas',
+        descripcion: 'Color: Negro',
+        precio: 3000,
+        imagen: '1778555030723.jpg',
+        categoria: 'accesorios',
+        
+    },
+    // ===== CALZADO (NUEVA CATEGORÍA) =====
+    {
+        id: 'converse',
+        nombre: 'Converse',
+        descripcion: '#36, 39, 40',
+        precio: 15000,
+        imagen: '1778555027483.jpg',
+        categoria: 'calzado',
+        
+    },
+    {
+        id: 'nike-air',
+        nombre: 'Nike Air',
+        descripcion: '#45, Son G5',
+        precio: 17000,
+        imagen: '1778555027411.jpg',
+        categoria: 'calzado',
+        
+    },
+    {
+        id: 'nike-air',
+        nombre: 'Nike Air',
+        descripcion: '#36, 37.5',
+        precio: 15500,
+        imagen: '1778555027340.jpg',
+        categoria: 'calzado',
+        
+    },
+   
 ];

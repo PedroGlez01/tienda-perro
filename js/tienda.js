@@ -4,10 +4,10 @@
 
 // Variables globales para el formulario
 let productoActual = '';
-let precioActualTexto = ''; // Para mostrar (ej: "$1250 CUP")
-let precioUnitario = 0; // NUEVO: Guardamos el precio como número para cálculos
+let precioActualTexto = '';
+let precioUnitario = 0;
 let productoIdActual = '';
-let productosGlobal = []; // Aquí guardaremos los productos
+let productosGlobal = [];
 
 // Función para verificar si un producto es nuevo (menos de 3 días)
 function esProductoNuevo(producto) {
@@ -43,31 +43,27 @@ function mostrarCategoria(categoria) {
     localStorage.setItem('categoria-activa', categoria);
 }
 
-// NUEVA FUNCIÓN: Actualizar el total cuando cambia la cantidad
+// Actualizar el total cuando cambia la cantidad
 function actualizarTotal() {
     const cantidad = parseInt(document.getElementById('cantidadInput').value) || 1;
     const total = precioUnitario * cantidad;
     document.getElementById('totalPagar').value = `$${total} CUP`;
 }
 
-// Función para abrir el formulario - MODIFICADA
+// Función para abrir el formulario
 function abrirFormulario(producto, precioTexto, precioNumero, id) {
     productoActual = producto;
     precioActualTexto = precioTexto;
     precioUnitario = precioNumero;
     productoIdActual = id || '';
     
-    // Establecer valores iniciales
     document.getElementById('productoSeleccionado').value = `${producto} - ${precioTexto}`;
     document.getElementById('nombreInput').value = '';
     document.getElementById('contactoInput').value = '';
     document.getElementById('direccionInput').value = '';
     document.getElementById('cantidadInput').value = '1';
     
-    // Calcular y mostrar el total inicial
     actualizarTotal();
-    
-    // Mostrar el formulario
     document.getElementById('formOverlay').style.display = 'flex';
 }
 
@@ -76,7 +72,7 @@ function cerrarFormulario() {
     document.getElementById('formOverlay').style.display = 'none';
 }
 
-// Función para enviar el pedido - MODIFICADA para incluir el total
+// Función para enviar el pedido
 function enviarPedido() {
     const nombre = document.getElementById('nombreInput').value.trim();
     const contacto = document.getElementById('contactoInput').value.trim();
@@ -89,7 +85,6 @@ function enviarPedido() {
         return;
     }
     
-    // Crear mensaje con TODO incluido
     let mensaje = `*NUEVO PEDIDO - TodoClick*%0A%0A`;
     mensaje += `*👤 Cliente:* ${nombre}%0A`;
     mensaje += `*📱 Contacto:* ${contacto}%0A`;
@@ -98,15 +93,10 @@ function enviarPedido() {
     mensaje += `▪️ Producto: ${productoActual}%0A`;
     mensaje += `▪️ Precio unitario: ${precioActualTexto}%0A`;
     mensaje += `▪️ Cantidad: ${cantidad}%0A`;
-    mensaje += `▪️ *TOTAL A PAGAR: $${total} CUP*%0A`; // NUEVO: Total en negrita
+    mensaje += `▪️ *TOTAL A PAGAR: $${total} CUP*%0A%0A`;
+    mensaje += `📌 Nota: Por favor confirmar disponibilidad y horario de entrega.`;
     
-    // Agregar nota si es necesario
-    mensaje += `%0A📌 Nota: Por favor confirmar disponibilidad y horario de entrega.`;
-    
-    // Abrir WhatsApp
     window.open(`https://wa.me/53706086?text=${mensaje}`, '_blank');
-    
-    // Cerrar formulario
     cerrarFormulario();
 }
 
@@ -117,13 +107,21 @@ function obtenerCategorias(productos) {
         if (!categorias[prod.categoria]) {
             let icono = '📦';
             if (prod.categoria === 'electronica') icono = '💻';
-            else if (prod.categoria === 'hogar') icono = '🏠';
             else if (prod.categoria === 'moda') icono = '👕';
-            else if (prod.categoria === 'belleza') icono = '💄';
-            else if (prod.categoria === 'deportes') icono = '⚽';
+            else if (prod.categoria === 'accesorios') icono = '⌚';
+            else if (prod.categoria === 'calzado') icono = '👟';
+            
+            // Capitalizar el nombre de la categoría
+            let nombreCategoria = prod.categoria.charAt(0).toUpperCase() + prod.categoria.slice(1);
+            
+            // Nombres personalizados
+            if (prod.categoria === 'accesorios') nombreCategoria = 'Accesorios';
+            if (prod.categoria === 'calzado') nombreCategoria = 'Calzado';
+            if (prod.categoria === 'electronica') nombreCategoria = 'Electrónica';
+            if (prod.categoria === 'moda') nombreCategoria = 'Moda';
             
             categorias[prod.categoria] = {
-                nombre: prod.categoria.charAt(0).toUpperCase() + prod.categoria.slice(1),
+                nombre: nombreCategoria,
                 icono: icono
             };
         }
@@ -169,7 +167,7 @@ function generarContenedoresCategorias() {
     }
 }
 
-// Función para generar las tarjetas de productos - MODIFICADA la llamada a abrirFormulario
+// Función para generar las tarjetas de productos con contenedor flexible
 function generarTarjetasProductos(productosFiltrados = null) {
     const productosAMostrar = productosFiltrados || productos;
     
@@ -194,12 +192,14 @@ function generarTarjetasProductos(productosFiltrados = null) {
                 etiquetaHTML = `<div class="etiqueta etiqueta-mas-vendido">⭐ MÁS VENDIDO</div>`;
             }
             
-            // MODIFICADO: Pasar el precio como número
             const precioNumero = prod.precio;
+            const rutaImagen = `imagenes/${prod.imagen}`;
             
             card.innerHTML = `
                 ${etiquetaHTML}
-                <img src="imagenes/${prod.imagen}" alt="${prod.nombre}" class="producto-imagen-real">
+                <div class="contenedor-imagen">
+                    <img src="${rutaImagen}" alt="${prod.nombre}" onerror="this.src='imagenes/placeholder.jpg'">
+                </div>
                 <h3>${prod.nombre}</h3>
                 <p>${prod.descripcion}</p>
                 <p class="precio">$${precioNumero} CUP</p>
@@ -285,10 +285,13 @@ function configurarBuscador() {
                 }
                 
                 const precioNumero = prod.precio;
+                const rutaImagen = `imagenes/${prod.imagen}`;
                 
                 card.innerHTML = `
                     ${etiquetaHTML}
-                    <img src="imagenes/${prod.imagen}" alt="${prod.nombre}" class="producto-imagen-real">
+                    <div class="contenedor-imagen">
+                        <img src="${rutaImagen}" alt="${prod.nombre}" onerror="this.src='imagenes/placeholder.jpg'">
+                    </div>
                     <h3>${prod.nombre}</h3>
                     <p>${prod.descripcion}</p>
                     <p class="precio">$${precioNumero} CUP</p>
@@ -304,18 +307,15 @@ function configurarBuscador() {
 
 // Inicializar cuando cargue la página
 document.addEventListener('DOMContentLoaded', function() {
-    // Guardar productos en variable global
     if (typeof productos !== 'undefined') {
         productosGlobal = productos;
     }
     
-    // Generar estructura
     generarBotonesCategorias();
     generarContenedoresCategorias();
     generarTarjetasProductos();
     actualizarContadores();
     
-    // Cargar última categoría vista
     const categorias = Object.keys(obtenerCategorias(productos));
     if (categorias.length > 0) {
         const categoriaGuardada = localStorage.getItem('categoria-activa') || categorias[0];
@@ -326,10 +326,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Configurar buscador
     configurarBuscador();
     
-    // Cerrar formulario al hacer clic fuera
     const overlay = document.getElementById('formOverlay');
     if (overlay) {
         overlay.addEventListener('click', function(e) {
